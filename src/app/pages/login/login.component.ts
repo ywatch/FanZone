@@ -34,7 +34,7 @@ this.http.get(`http://localhost:8080/user/login?username=${this.loginObj.Name}&p
   })
 ).subscribe(response=>{
   alert(response);
-  this.router.navigateByUrl('/dashboard');
+  this.router.navigateByUrl('/home');
 },
 error=>{
   console.error(error);
