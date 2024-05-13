@@ -2,12 +2,14 @@ package com.example.api1.api.controller;
 
 
 import com.example.api1.api.model.Hebergement;
-import com.example.api1.repository.HebergementRepository;
 import com.example.api1.service.HebergementService;
+import com.example.api1.service.imageHebergementUploadService;
+import com.example.api1.service.imageStadeUploadUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,12 +17,24 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/hebergement")
 public class HebergementController {
-    @Autowired
+  private imageHebergementUploadService imageHebergementUploadService;
+
+  @Autowired
     HebergementService hebergementService;
+  public HebergementController(imageHebergementUploadService imageHebergementUploadService) {
+    this.imageHebergementUploadService = imageHebergementUploadService;
+  }
     @PostMapping("/add")
-    public String addStade(@RequestBody Hebergement hebergement) {
+    public String addStade(@RequestPart("hebergement") Hebergement hebergement, @RequestPart("file") MultipartFile file) {
+      try {
         hebergementService.savehebe(hebergement);
-        return "Stade added";
+        String filePath = imageHebergementUploadService.uploadFile(file);
+        hebergement.setPathpic(filePath);
+        hebergementService.savehebe(hebergement);
+        return "Stade added; File uploaded successfully. Path: " + filePath;
+      } catch (Exception e) {
+        return "Failed to upload file: " + e.getMessage();
+      }
     }
     @GetMapping("/getAll")
     public List<Hebergement> getAll() {
