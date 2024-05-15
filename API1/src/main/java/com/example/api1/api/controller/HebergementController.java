@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/hebergement")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HebergementController {
   private imageHebergementUploadService imageHebergementUploadService;
 

@@ -5,6 +5,7 @@ import com.example.api1.service.imageStadeUploadUploadService;
 import com.example.api1.service.StadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +15,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/stade")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StadeController {
   private imageStadeUploadUploadService imageStadeUploadUploadService;
   @Autowired
@@ -34,10 +36,10 @@ public class StadeController {
       return "Failed to upload file: " + e.getMessage();
     }
   }
-  @GetMapping("/getAll")
-    public List<Stade> getAll() {
-        return stadeService.getAllStades();
-    }
+  @GetMapping(value = "/getAll")
+  public List<Stade> getAll() {
+    return stadeService.getAllStades();
+  }
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         stadeService.delete(id);
