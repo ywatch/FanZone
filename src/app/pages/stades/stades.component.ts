@@ -2,10 +2,11 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Stade } from '../../Model/Stade';
+import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-stades',
   standalone: true,
-  imports: [NavbarComponent,HttpClientModule],
+  imports: [NavbarComponent,HttpClientModule,FooterComponent],
   templateUrl: './stades.component.html',
   styleUrl: './stades.component.css'
 })

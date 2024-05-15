@@ -1,18 +1,39 @@
 <app-navbar url1="/home" url2="/Forum" url3="/dashboard" url4="/Stades" url5="/Hebergements" ></app-navbar>
 <!-- component -->
-<div class="container mx-auto p-4 lg:h-screen flex items-center justify-center">
+<div class="container mx-auto p-4  flex items-center justify-center">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"  >
         <!-- Blog Entry 1 -->
 @for ( stade of stades; track $index) { 
-   <div class="mx-auto relative shadow-md rounded-lg cursor-pointer" >
-          <img src="./assets{{stade.pathpic.split('\assets')[1]}}" alt="" class="w-full h-full object-cover rounded-lg">
-          <div class="absolute bottom-0 left-0 right-0 h-40 bg-black bg-opacity-50 backdrop-blur text-white p-4 rounded-b-lg">
-            <h1 class="text-2xl font-semibold">{{stade.stadename}}</h1>
-            <p class="mt-2">{{stade.ville}}</p>
-            <p class="mt-2">{{stade.capacite}}</p>
+   <!-- component -->
+<div class="flex justify-center ">
+  <a class="rounded-3xl inline-block overflow-hidden shadow-xl max-w-xs cursor-pointer transition ease-in-out hover:-translate-y-1 hover:scale-102 duration-300">
+      <div class="relative group w-full overflow-hidden bg-black h-32 rounded-t-3xl">
+          <img
+          src="./assets{{stade.pathpic.split('\assets')[1]}}"
+          class="object-cover w-full h-full transform duration-700 backdrop-opacity-100"
+          />
+          <div class="absolute bg-gradient-to-t from-black w-full h-full flex items-end justify-center -inset-y-0"><h1 class="font-bold text-2xl text-white mb-2">{{stade.stadename}}</h1></div>
+      </div>
+      <div class="bg-white">
+          <div class="text-center px-3 pb-6 pt-2">
+              <p class="mt-2 font-sans font-light text-slate-700">
+Stade Officile Acceuillant les Match de coupe du Monde </p>
           </div>
-        </div> 
+          <div class="flex justify-center pb-3 text-slate-700">
+              <div class="text-center mr-3 border-r pr-3 last:border-r-0">
+                  <h2>Capaciter</h2>
+                  <span>{{stade.capacite}}</span>
+              </div>
+              <div class="text-center mr-3 border-r pr-3 last:border-r-0">
+                  <h2>Ville</h2>
+                  <span>{{stade.ville}} </span>
+              </div>
+          </div>
+      </div>
+  </a>
+
+</div>
         }
       </div>
 </div>
-
+<app-footer></app-footer>
