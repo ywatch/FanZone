@@ -8,6 +8,7 @@ export interface User {
     name: string;
     email: string;
     password: string;
+    connect:boolean;
     messageForum: MessageForum[];
     cForum: CommentaireForum[];
     cHebergement: CommentaireHebergement[];

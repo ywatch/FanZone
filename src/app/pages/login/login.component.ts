@@ -3,6 +3,7 @@ import { Component} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { User } from '../../Model/User';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,12 @@ import { catchError, throwError } from 'rxjs';
   styleUrl: './login.component.css'
 })
 export class LoginComponent{
-loginObj:login;
+user:User;
 constructor(private http:HttpClient,private router:Router){
-  this.loginObj=new login();
+this.user={name:"",password:"",email:"",id:0,cForum:[],cHebergement:[],cStade:[],messageForum:[],connect:false}
 }
 onLogin(){
-this.http.get(`http://localhost:8080/user/login?username=${this.loginObj.Name}&password=${this.loginObj.password}`,{responseType:'text'}).pipe(
+this.http.get(`http://localhost:8080/user/login?username=${this.user?.name}&password=${this.user?.password}`,{responseType:'text'}).pipe(
   catchError((error: HttpErrorResponse) => {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -33,19 +34,12 @@ this.http.get(`http://localhost:8080/user/login?username=${this.loginObj.Name}&p
     return throwError('Something bad happened; please try again later.');
   })
 ).subscribe(response=>{
+  const message = this.user.name;
   alert(response);
-  this.router.navigateByUrl('/home');
+  this.router.navigate(['/home',message]);
 },
 error=>{
   console.error(error);
 });
 }
-}
-export class login {
-  Name:string;
-  password:string;
-  constructor(){
-    this.Name='';
-    this.password='';
-  }
 }

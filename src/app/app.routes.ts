@@ -9,10 +9,11 @@ import { ForumComponent } from './pages/forum/forum.component';
 
 export const routes: Routes = [
     
-        {path:'',redirectTo:'home',pathMatch:'full'},
+        {path:'',redirectTo:'login',pathMatch:'full'},
         {path:'login',component:LoginComponent},
         {path:'register',component:RegisterComponent},
         {path:'home',component:LayoutComponent},
+        {path:'home/:message',component:LayoutComponent},
         {path:'dashboard',component:DashboardComponent},
         {path:'Stades',component:StadesComponent},
         {path:'Hebergements',component:HebergementsComponent},

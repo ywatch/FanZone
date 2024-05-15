@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { User } from '../../Model/User';
 
 @Component({
   selector: 'app-register',
@@ -12,12 +13,12 @@ import { catchError, throwError } from 'rxjs';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  registerObj: register;
+  user:User;
   constructor(private http: HttpClient,private router : Router){
-    this.registerObj=new register();
+    this.user={name:"",password:"",email:"",id:0,cForum:[],cHebergement:[],cStade:[],messageForum:[],connect:false}
   }
   onRegister(){
-    this.http.post('http://localhost:8080/user/add',this.registerObj,{responseType:'text'}).pipe(
+    this.http.post('http://localhost:8080/user/add',this.user,{responseType:'text'}).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
           // A client-side or network error occurred. Handle it accordingly.
@@ -39,15 +40,5 @@ export class RegisterComponent {
     error=>{
       console.error(error);
     });
-  }
-}
-export class register {
-  name:string;
-  email:string;
-  password:string;
-  constructor(){
-    this.name='';
-    this.email='';
-    this.password='';
   }
 }

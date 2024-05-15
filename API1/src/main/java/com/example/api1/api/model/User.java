@@ -19,7 +19,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private boolean connect;
+    private boolean connect=false;
     @OneToMany(mappedBy = "user")
     private List<MessageForum> messageForum;
     @OneToMany(mappedBy = "user")

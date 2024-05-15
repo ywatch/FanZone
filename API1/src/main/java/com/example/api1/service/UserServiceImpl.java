@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getByName(String name) {
-        List us = userRepository.findAll();
+        List<User> us = userRepository.findAll();
         User user = null;
         for (Object u : us) {
             if (((User) u).getName().equals(name)) {

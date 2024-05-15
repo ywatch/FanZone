@@ -55,6 +55,17 @@ public class UserController {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
     }
+  @GetMapping(path = "Connect/{Name}")
+  public ResponseEntity<User> connect(@PathVariable String Name) {
+    try{
+      User user = userService.getByName(Name);
+      user.setConnect(true);
+      userService.saveUser(user);
+      return new ResponseEntity<User>(user, HttpStatus.OK);
+    }catch(NoSuchElementException e){
+      return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+    }
+  }
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@RequestBody User user, @PathVariable Integer id) {
         try {
@@ -62,6 +73,7 @@ public class UserController {
             existinguser.setName(user.getName());
             existinguser.setEmail(user.getEmail());
             existinguser.setPassword(user.getPassword());
+            existinguser.setConnect(user.isConnect());
             userService.saveUser(existinguser);
             return new ResponseEntity<>(HttpStatus.OK);
 
