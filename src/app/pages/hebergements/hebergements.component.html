@@ -46,7 +46,7 @@
         </p>
         <div class="w-full flex justify-between items-center">
           <h1 class="font-bold text-gray-500">{{item.hprice}}</h1>
-          <button
+          <button (click)="goToOtherComponent(item.hname)"
             class="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md"
           >
             Add

@@ -1,7 +1,16 @@
 package com.example.api1.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class CommentaireHebergement {
     @Id
@@ -9,61 +18,12 @@ public class CommentaireHebergement {
     private Integer idCommentaire;
     private String Contenu;
     private String Datep;
+  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User user;
+  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "hebe_id")
     private Hebergement hebe;
-
-    public CommentaireHebergement() {
-    }
-
-    public CommentaireHebergement(Integer idCommentaire, String contenu, String datep, User user, Hebergement hebe) {
-        this.idCommentaire = idCommentaire;
-        Contenu = contenu;
-        Datep = datep;
-        this.user = user;
-        this.hebe = hebe;
-    }
-
-    public void setIdCommentaire(Integer idCommentaire) {
-        this.idCommentaire = idCommentaire;
-    }
-
-    public void setContenu(String contenu) {
-        Contenu = contenu;
-    }
-
-    public void setDatep(String datep) {
-        Datep = datep;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setHebe(Hebergement hebe) {
-        this.hebe = hebe;
-    }
-
-    public Integer getIdCommentaire() {
-        return idCommentaire;
-    }
-
-    public String getContenu() {
-        return Contenu;
-    }
-
-    public String getDatep() {
-        return Datep;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Hebergement getHebe() {
-        return hebe;
-    }
 }

@@ -1,5 +1,6 @@
 package com.example.api1.api.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Stade {
     private String Ville;
     private int capacite;
     private String Pathpic;
-  @OneToMany(mappedBy = "stade")
-    private List<CommentaireStade> CStade;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "stade")
+      private List<CommentaireStade> CStade;
 }

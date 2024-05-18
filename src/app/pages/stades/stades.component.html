@@ -5,6 +5,7 @@
         <!-- Blog Entry 1 -->
 @for ( stade of stades; track $index) { 
    <!-- component -->
+   <a (click)="goToOtherComponent(stade.stadename)">
 <div class="flex justify-center ">
   <a class="rounded-3xl inline-block overflow-hidden shadow-xl max-w-xs cursor-pointer transition ease-in-out hover:-translate-y-1 hover:scale-102 duration-300">
       <div class="relative group w-full overflow-hidden bg-black h-32 rounded-t-3xl">
@@ -32,8 +33,8 @@ Stade Officile Acceuillant les Match de coupe du Monde </p>
       </div>
   </a>
 
-</div>
+</div></a>
         }
-      </div>
+</div>
 </div>
 <app-footer></app-footer>

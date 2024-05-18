@@ -1,5 +1,7 @@
 package com.example.api1.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,10 +14,12 @@ public class MessageForum {
     private int idm;
     private String contenu;
     private String datepublication;
+  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User user;
-    @OneToMany(mappedBy = "messageF")
+  @JsonManagedReference
+  @OneToMany(mappedBy = "messageF")
     private List<CommentaireForum> CForum;
 
     public MessageForum(int idm, String contenu, String datepublication, User user) {

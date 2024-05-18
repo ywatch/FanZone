@@ -1,5 +1,6 @@
 package com.example.api1.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,9 +10,11 @@ public class CommentaireForum {
     private Integer idCommentaire;
     private String Contenu;
     private String Datep;
+  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User user;
+  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "Message_id")
     private MessageForum messageF;

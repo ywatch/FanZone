@@ -6,16 +6,18 @@ import { RegisterComponent } from './pages/register/register.component';
 import { StadesComponent } from './pages/stades/stades.component';
 import { HebergementsComponent } from './pages/hebergements/hebergements.component';
 import { ForumComponent } from './pages/forum/forum.component';
+import { SinglepageCardsComponent } from './pages/singlepage-cards/singlepage-cards.component';
 
 export const routes: Routes = [
     
-        {path:'',redirectTo:'login',pathMatch:'full'},
+        {path:'',redirectTo:'home',pathMatch:'full'},
         {path:'login',component:LoginComponent},
         {path:'register',component:RegisterComponent},
         {path:'home',component:LayoutComponent},
         {path:'home/:message',component:LayoutComponent},
         {path:'dashboard',component:DashboardComponent},
         {path:'Stades',component:StadesComponent},
+        {path:'single/:message',component:SinglepageCardsComponent},
         {path:'Hebergements',component:HebergementsComponent},
         {path:'Forum',component:ForumComponent}
     ];

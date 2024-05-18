@@ -1,5 +1,6 @@
 package com.example.api1.api.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Hebergement {
     private String hadd;
     private double hprice;
     private String Pathpic;
+  @JsonManagedReference
   @OneToMany(mappedBy = "hebe")
     private List<CommentaireHebergement> CHebergement;
 }
