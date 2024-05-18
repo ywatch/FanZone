@@ -29,9 +29,9 @@
       <form class="mt-6">
         <div class="mb-4">
           <label for="comment" class="block text-gray-700 font-bold mb-2">Add a comment:</label>
-          <textarea id="comment" name="comment" rows="3" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Write your comment here..."></textarea>
+          <textarea id="comment"  name="comment" rows="3" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Write your comment here..."></textarea>
         </div>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>
+        <button type="submit"  class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>
       </form>
     </div>
   </div>}@else if (item=='Stade') {
@@ -66,9 +66,9 @@
         <form class="mt-6">
           <div class="mb-4">
             <label for="comment" class="block text-gray-700 font-bold mb-2">Add a comment:</label>
-            <textarea id="comment" name="comment" rows="3" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Write your comment here..."></textarea>
+            <textarea id="comment"[(ngModel)]="commentStade.contenu" name="comment" rows="3" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Write your comment here..."></textarea>
           </div>
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>
+          <button type="submit"(click)="setcommentStade()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>
         </form>
       </div>
     </div>

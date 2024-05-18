@@ -25,16 +25,15 @@ public class CommentaireStadeServiceImpl implements CommentaireStadeService {
     List<CommentaireStade> c = commentaireStadeRepository.findAll();
     List <comment>ret = new ArrayList<comment>();
     for (CommentaireStade c1 : c) {
-      if(Objects.equals(c1.getStade().getStadename(), name)){
+      if (Objects.equals(c1.getStade().getStadename(), name)){
         ret.add(new comment(c1.getUser().getName(),c1.getContenu()));
-        return ret;
       }
-      else {
+      else{
         System.out.println("Not found");
         return null;
       }
     }
-    return null;
+    return ret;
   }
 
   @Override

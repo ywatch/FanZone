@@ -10,11 +10,9 @@ public class CommentaireForum {
     private Integer idCommentaire;
     private String Contenu;
     private String Datep;
-  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User user;
-  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "Message_id")
     private MessageForum messageF;
@@ -63,6 +61,7 @@ public class CommentaireForum {
         return Datep;
     }
 
+    @JsonBackReference
     public User getUser() {
         return user;
     }

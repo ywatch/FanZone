@@ -14,11 +14,9 @@ public class MessageForum {
     private int idm;
     private String contenu;
     private String datepublication;
-  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User user;
-  @JsonManagedReference
   @OneToMany(mappedBy = "messageF")
     private List<CommentaireForum> CForum;
 

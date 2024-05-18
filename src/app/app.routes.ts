@@ -16,8 +16,8 @@ export const routes: Routes = [
         {path:'home',component:LayoutComponent},
         {path:'home/:message',component:LayoutComponent},
         {path:'dashboard',component:DashboardComponent},
-        {path:'Stades',component:StadesComponent},
-        {path:'single/:message',component:SinglepageCardsComponent},
+        {path:'Stades/:message',component:StadesComponent},
+        {path:'single/:message/:user',component:SinglepageCardsComponent},
         {path:'Hebergements',component:HebergementsComponent},
         {path:'Forum',component:ForumComponent}
     ];

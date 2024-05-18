@@ -21,16 +21,12 @@ public class User {
     private String email;
     private String password;
     private boolean connect=false;
-    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<MessageForum> messageForum;
-    @JsonManagedReference
     @OneToMany(mappedBy = "user")
       private List<CommentaireForum> CForum;
-    @JsonManagedReference
     @OneToMany(mappedBy = "user")
       private List<CommentaireHebergement> CHebergement;
-    @JsonManagedReference
     @OneToMany(mappedBy = "user")
       private List<CommentaireStade> CStade;
 

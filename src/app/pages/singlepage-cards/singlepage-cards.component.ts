@@ -10,11 +10,12 @@ import { CommentaireStade } from '../../Model/CommentaireStade';
 import { User } from '../../Model/User';
 import { comment } from '../../Model/comment';
 import{Dates}from'../../Model/Dates'
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-singlepage-cards',
   standalone: true,
-  imports: [NavbarComponent,FooterComponent,HttpClientModule],
+  imports: [NavbarComponent,FormsModule,FooterComponent,HttpClientModule],
   templateUrl: './singlepage-cards.component.html',
   styleUrl: './singlepage-cards.component.css'
 })
@@ -31,6 +32,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
   private previousUrl: string = '';
   private currentUrl: string = '';
   user:User;
+  userl:String='';
   hebe:Hebergement;
   comment:comment[]=[];
   commentStade:CommentaireStade;
@@ -46,7 +48,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
     this.hebe={hid:0,hadd:'',hname:'',hprice:0,pathpic:"",cHebergement:[]}
     this.stade={sid:0,stadename:'',ville:'',capacite:0,pathpic:'',cStade:[]}
     this.user={name:"",password:"",email:"",id:0,cForum:[],cHebergement:[],cStade:[],messageForum:[],connect:false}
-    this.commentStade={idCommentaire:0,contenu:'',datep:this.dateFormatee,user:this.user,stade:this.stade}
+    this.commentStade={contenu:'',datep:this.dateFormatee,user:this.user,stade:this.stade}
     this.currentUrl = this.router.url;
     this.router.events
       .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -58,12 +60,12 @@ export class SinglepageCardsComponent implements OnInit,Dates {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.message = params['message'];
+      this.userl=params['user'];
     });
     if (this.previousUrl='/Hebergements') { 
    this.http.get<Hebergement>(`http://localhost:8080/hebergement/${this.message}`).subscribe((data:Hebergement)=>{
     this.hebe=data;
     this.item='Hebergement';
-    console.log(this.hebe)
     },(error)=>{
       console.log(error);
     })}
@@ -72,6 +74,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
       this.stade=data;
       this.item='Stade';
       this.fetchcomentStade();
+      this.getuser();
     },(error)=>{
       console.log(error);
     })
@@ -80,6 +83,13 @@ export class SinglepageCardsComponent implements OnInit,Dates {
     }
      
   } 
+  getuser(){
+    this.http.get<User>(`http://localhost:8080/user/${this.userl}`).subscribe((data:User)=>{
+      this.user=data;
+    },(error)=>{
+      console.log(error);
+    })
+  }
   fetchcomentStade(){
         this.http.get<comment[]>(`http://localhost:8080/CommentaireStade/${this.message}`).subscribe((data:comment[])=>{
         this.comment=data;
@@ -87,7 +97,11 @@ export class SinglepageCardsComponent implements OnInit,Dates {
          console.log(error);
         })}
   setcommentStade(){
-      this.http.post('http://localhost:8080/CommentaireStade/add',this.commentStade,{responseType:'text'}).pipe(
+    this.stade={sid:this.stade.sid,stadename:this.stade.stadename,ville:this.stade.ville,capacite:this.stade.capacite,pathpic:this.stade.pathpic,cStade:[]}
+    this.user={name:this.user.name,password:this.user.password,email:this.user.email,id:this.user.id,cForum:[],cHebergement:[],cStade:[],messageForum:[],connect:false}
+    this.commentStade={contenu:this.commentStade.contenu,datep:this.dateFormatee,user:this.user,stade:this.stade}
+    console.log(this.commentStade)  
+    this.http.post('http://localhost:8080/CommentaireStade/add',this.commentStade,{responseType:'text'}).pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
@@ -104,7 +118,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
         })
       ).subscribe(response=>{
         alert(response);
-        this.router.navigateByUrl('/login');
+        // this.router.navigateByUrl('/login');
       },
       error=>{
         console.error(error);

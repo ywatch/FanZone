@@ -3,7 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Stade } from '../../Model/Stade';
 import { FooterComponent } from '../footer/footer.component';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 @Component({
   selector: 'app-stades',
   standalone: true,
@@ -16,10 +16,14 @@ import { Route, Router } from '@angular/router';
 })
 export class StadesComponent implements OnInit {
 stades:Stade[] = []
-constructor(private http:HttpClient,private router:Router){
+messageu:string="";
+constructor(private http:HttpClient,private router:Router,private route: ActivatedRoute){
   this.fetchData();
 }
 ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.messageu = params['message'];
+  });
   this.fetchData();
 }
 public fetchData(){
@@ -36,6 +40,6 @@ public fetchData(){
   })
 }
 goToOtherComponent(message:string) {
-  this.router.navigate(['/single',message ]);
+  this.router.navigate(['/single',message,this.messageu]);
 }
 }
