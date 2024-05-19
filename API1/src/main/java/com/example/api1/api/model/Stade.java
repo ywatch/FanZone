@@ -21,7 +21,9 @@ public class Stade {
     private String Ville;
     private int capacite;
     private String Pathpic;
-//    @JsonManagedReference
+
+
     @OneToMany(mappedBy = "stade")
+    @JsonManagedReference("Stade-commentaire")
     private List<CommentaireStade> CStade;
 }

@@ -3,7 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Hebergement } from '../../Model/Hebergement';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-hebergements',
@@ -14,10 +14,14 @@ import { Router } from '@angular/router';
 })
 export class HebergementsComponent implements OnInit {
   hebe:Hebergement[]=[]
-  constructor(private http:HttpClient,private router:Router){
+  messageu:string="";
+  constructor(private http:HttpClient,private router:Router,private route: ActivatedRoute){
     this.fetchData();
   }
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.messageu = params['message'];
+    });
     this.fetchData();
   }
   public fetchData(){
@@ -34,6 +38,6 @@ export class HebergementsComponent implements OnInit {
     })
   }
   goToOtherComponent(message:string) {
-    this.router.navigate(['/single',message ]);
+    this.router.navigate(['/single',message,this.messageu]);
   }
 }

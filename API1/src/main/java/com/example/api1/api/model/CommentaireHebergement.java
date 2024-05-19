@@ -19,8 +19,10 @@ public class CommentaireHebergement {
     private String Datep;
     @ManyToOne
     @JoinColumn(name = "User_id")
+    @JsonBackReference("user-chebergement")
     private User user;
     @ManyToOne
     @JoinColumn(name = "hebe_id")
+    @JsonBackReference("Hebergement-commentaire")
     private Hebergement hebe;
 }

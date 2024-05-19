@@ -22,12 +22,16 @@ public class User {
     private String password;
     private boolean connect=false;
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference("user-message")
     private List<MessageForum> messageForum;
     @OneToMany(mappedBy = "user")
-      private List<CommentaireForum> CForum;
+    @JsonManagedReference("user-cforum")
+    private List<CommentaireForum> CForum;
     @OneToMany(mappedBy = "user")
-      private List<CommentaireHebergement> CHebergement;
+    @JsonManagedReference("user-chebergement")
+    private List<CommentaireHebergement> CHebergement;
     @OneToMany(mappedBy = "user")
-      private List<CommentaireStade> CStade;
+    @JsonManagedReference("user-cstade")
+    private List<CommentaireStade> CStade;
 
 }

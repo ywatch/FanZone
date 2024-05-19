@@ -11,10 +11,12 @@ public class CommentaireStade {
     private String Datep;
     @ManyToOne
     @JoinColumn(name = "User_id")
+    @JsonBackReference("user-cstade")
     private User user;
-//    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "Stade_id")
+    @JsonBackReference("Stade-commentaire")
     private Stade stade;
 
     public CommentaireStade(Integer idCommentaire, String contenu, String datep, User user, Stade stade) {

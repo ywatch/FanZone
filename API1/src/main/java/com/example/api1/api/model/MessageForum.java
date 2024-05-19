@@ -14,11 +14,15 @@ public class MessageForum {
     private int idm;
     private String contenu;
     private String datepublication;
+
     @ManyToOne
     @JoinColumn(name = "User_id")
+    @JsonBackReference("user-message")
     private User user;
+
   @OneToMany(mappedBy = "messageF")
-    private List<CommentaireForum> CForum;
+  @JsonManagedReference("message-commentaire")
+  private List<CommentaireForum> CForum;
 
     public MessageForum(int idm, String contenu, String datepublication, User user) {
         this.idm = idm;

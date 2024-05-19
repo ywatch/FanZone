@@ -10,11 +10,15 @@ public class CommentaireForum {
     private Integer idCommentaire;
     private String Contenu;
     private String Datep;
+
     @ManyToOne
     @JoinColumn(name = "User_id")
+    @JsonBackReference("user-cforum")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "Message_id")
+    @JsonBackReference("message-commentaire")
     private MessageForum messageF;
 
     public CommentaireForum(Integer idCommentaire, String contenu, String datep, User user, MessageForum messageF) {

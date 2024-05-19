@@ -22,5 +22,6 @@ public class Hebergement {
     private double hprice;
     private String Pathpic;
   @OneToMany(mappedBy = "hebe")
-    private List<CommentaireHebergement> CHebergement;
+  @JsonManagedReference("Hebergement-commentaire")
+  private List<CommentaireHebergement> CHebergement;
 }

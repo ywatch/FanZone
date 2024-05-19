@@ -18,6 +18,6 @@ export const routes: Routes = [
         {path:'dashboard',component:DashboardComponent},
         {path:'Stades/:message',component:StadesComponent},
         {path:'single/:message/:user',component:SinglepageCardsComponent},
-        {path:'Hebergements',component:HebergementsComponent},
+        {path:'Hebergements/:message',component:HebergementsComponent},
         {path:'Forum',component:ForumComponent}
     ];

@@ -19,19 +19,19 @@
       <h3 class="text-xl font-semibold text-gray-800 mb-4">Comments</h3>
       <div class="space-y-4">
         <!-- Comment 1 -->
-        @for (item of hebe.cHebergement; track $index) {
-        <div class="bg-gray-100 p-4 rounded-lg">
-          <p class="text-gray-800 font-semibold">{{item.user.name}}</p>
-          <p class="text-gray-600 text-sm">{{item.contenu}}</p>
-        </div>}
+        @for (item of comment; track $index) {
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <p class="text-gray-800 font-semibold">{{item.username}}</p>
+            <p class="text-gray-600 text-sm">{{item.contenu}}</p>
+          </div>}
       </div>
       <!-- Add Comment Form -->
       <form class="mt-6">
         <div class="mb-4">
           <label for="comment" class="block text-gray-700 font-bold mb-2">Add a comment:</label>
-          <textarea id="comment"  name="comment" rows="3" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Write your comment here..."></textarea>
+          <textarea id="comment" [(ngModel)]="commenthebergement.contenu" name="comment" rows="3" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Write your comment here..."></textarea>
         </div>
-        <button type="submit"  class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>
+        <button type="submit" (click)="setcommentHebergement()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>
       </form>
     </div>
   </div>}@else if (item=='Stade') {

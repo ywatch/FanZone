@@ -11,6 +11,7 @@ import { User } from '../../Model/User';
 import { comment } from '../../Model/comment';
 import{Dates}from'../../Model/Dates'
 import { FormsModule } from '@angular/forms';
+import { CommentaireHebergement } from '../../Model/CommentaireHebergement';
 
 @Component({
   selector: 'app-singlepage-cards',
@@ -36,6 +37,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
   hebe:Hebergement;
   comment:comment[]=[];
   commentStade:CommentaireStade;
+  commenthebergement:CommentaireHebergement;  
   stade:Stade;
   item:any;
   url:any;
@@ -49,6 +51,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
     this.stade={sid:0,stadename:'',ville:'',capacite:0,pathpic:'',cStade:[]}
     this.user={name:"",password:"",email:"",id:0,cForum:[],cHebergement:[],cStade:[],messageForum:[],connect:false}
     this.commentStade={contenu:'',datep:this.dateFormatee,user:this.user,stade:this.stade}
+    this.commenthebergement={contenu:'',datep:this.dateFormatee,user:this.user,hebe:this.hebe}
     this.currentUrl = this.router.url;
     this.router.events
       .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -66,6 +69,8 @@ export class SinglepageCardsComponent implements OnInit,Dates {
    this.http.get<Hebergement>(`http://localhost:8080/hebergement/${this.message}`).subscribe((data:Hebergement)=>{
     this.hebe=data;
     this.item='Hebergement';
+    this.fetchcomentHebergement();
+    this.getuser();
     },(error)=>{
       console.log(error);
     })}
@@ -83,25 +88,55 @@ export class SinglepageCardsComponent implements OnInit,Dates {
     }
      
   } 
-  getuser(){
+getuser(){
     this.http.get<User>(`http://localhost:8080/user/${this.userl}`).subscribe((data:User)=>{
       this.user=data;
     },(error)=>{
       console.log(error);
     })
   }
-  fetchcomentStade(){
+fetchcomentStade(){
         this.http.get<comment[]>(`http://localhost:8080/CommentaireStade/${this.message}`).subscribe((data:comment[])=>{
         this.comment=data;
         },(error)=>{
          console.log(error);
         })}
-  setcommentStade(){
-    this.stade={sid:this.stade.sid,stadename:this.stade.stadename,ville:this.stade.ville,capacite:this.stade.capacite,pathpic:this.stade.pathpic,cStade:[]}
-    this.user={name:this.user.name,password:this.user.password,email:this.user.email,id:this.user.id,cForum:[],cHebergement:[],cStade:[],messageForum:[],connect:false}
+fetchcomentHebergement(){
+          this.http.get<comment[]>(`http://localhost:8080/CommentaireHebergement/${this.message}`).subscribe((data:comment[])=>{
+          this.comment=data;
+          },(error)=>{
+           console.log(error);
+          })}
+setcommentStade(){
     this.commentStade={contenu:this.commentStade.contenu,datep:this.dateFormatee,user:this.user,stade:this.stade}
     console.log(this.commentStade)  
     this.http.post('http://localhost:8080/CommentaireStade/add',this.commentStade,{responseType:'text'}).pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.error instanceof ErrorEvent) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error.message);
+          } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong.
+            console.error(
+              `Backend returned code ${error.status}, ` +
+              `body was: ${error.error}`);
+          }
+          // Return an observable with a user-facing error message.
+          return throwError('Something bad happened; please try again later.');
+        })
+      ).subscribe(response=>{
+        alert(response);
+        // this.router.navigateByUrl('/login');
+      },
+      error=>{
+        console.error(error);
+      });
+  }
+setcommentHebergement(){
+  this.commenthebergement={contenu:this.commenthebergement.contenu,datep:this.dateFormatee,user:this.user,hebe:this.hebe}  
+    console.log(this.commenthebergement)
+  this.http.post('http://localhost:8080/CommentaireHebergement/add',this.commenthebergement,{responseType:'text'}).pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
