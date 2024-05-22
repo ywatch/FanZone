@@ -27,11 +27,6 @@ export class HebergementsComponent implements OnInit {
   public fetchData(){
     this.http.get<Hebergement[]>("http://localhost:8080/hebergement/getAll").subscribe((data:Hebergement[])=>{
       console.log(data)
-      // for (let index = 0; index < data.length; index++) {
-      //   const element = data[index];
-      //   alert(element.cHebergement)
-      //   alert(`./assets${element.pathpic.split('\assets')[1]}`)
-      // }
       this.hebe = data;
     },(error)=>{
       console.log(error);

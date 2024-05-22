@@ -60,7 +60,7 @@ export class SinglepageCardsComponent implements OnInit,Dates {
         this.currentUrl = event.urlAfterRedirects;
       });
   }
-  ngOnInit() {
+ngOnInit() {
     this.route.params.subscribe(params => {
       this.message = params['message'];
       this.userl=params['user'];

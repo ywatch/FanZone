@@ -19,5 +19,5 @@ export const routes: Routes = [
         {path:'Stades/:message',component:StadesComponent},
         {path:'single/:message/:user',component:SinglepageCardsComponent},
         {path:'Hebergements/:message',component:HebergementsComponent},
-        {path:'Forum',component:ForumComponent}
+        {path:'Forum/:message',component:ForumComponent}
     ];

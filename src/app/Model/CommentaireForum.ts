@@ -1,10 +1,10 @@
 import { MessageForum } from "./MessageForum";
+import { Posts } from "./Posts";
 import { User } from "./User";
 
 export interface CommentaireForum {
-    id: number;
     contenu: string;
     datep: string;
     user: User;
-    messageforum:MessageForum
+    messageF:MessageForum
   }
