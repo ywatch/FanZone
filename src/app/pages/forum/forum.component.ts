@@ -37,6 +37,7 @@ export class ForumComponent implements OnInit{
   Showcreate:boolean=false;
   commentmessage:CommentaireForum;
   messageForum:MessageForum;
+  typeforum:String='';
   constructor(private http:HttpClient,private route: ActivatedRoute){
     this.user={id:0,name:'',email:'',password:'',connect:false,cForum:[],cHebergement:[],cStade:[],messageForum:[]}
     this.dateActuelle = new Date();
@@ -105,7 +106,6 @@ export class ForumComponent implements OnInit{
         console.error(error);
       });
   }}}
-  
 fetchcomentmessage(id:number){
   this.Showcomment=true;
   this.getmessage(id)
@@ -141,7 +141,7 @@ setcommentMessage(){
         console.error(error);
       });
   }
-  getmessage(id:number){
+getmessage(id:number){
       console.log(id);
       this.http.get<MessageForum>(`http://localhost:8080/Message/${id}`).subscribe((data:MessageForum)=>{
       this.messageForum=data;
@@ -150,6 +150,15 @@ setcommentMessage(){
       console.log(error);
     })
   }
+choosegenerale(){
+    this.typeforum='general';
+}
+choosestade(){
+  this.typeforum='stades';
+}
+choosehebe(){
+  this.typeforum='hebergements';
+}
 }
 function padToTwoDigits(num: number): string {
   return num.toString().padStart(2, '0');

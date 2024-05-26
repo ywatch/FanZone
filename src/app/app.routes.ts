@@ -15,7 +15,7 @@ export const routes: Routes = [
         {path:'register',component:RegisterComponent},
         {path:'home',component:LayoutComponent},
         {path:'home/:message',component:LayoutComponent},
-        {path:'dashboard',component:DashboardComponent},
+        {path:'dashboard/:message',component:DashboardComponent},
         {path:'Stades/:message',component:StadesComponent},
         {path:'single/:message/:user',component:SinglepageCardsComponent},
         {path:'Hebergements/:message',component:HebergementsComponent},

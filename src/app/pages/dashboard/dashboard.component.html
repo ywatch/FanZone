@@ -14,16 +14,13 @@
             <nav>
                 <ul>
                     <li class="mb-2">
-                        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Home</a>
+                        <a (click)="homechoose()" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Home</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Profile</a>
+                        <a (click)="profilechoose()" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Profile</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Logout</a>
+                        <a (click)="settingchoose()" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
                     </li>
                 </ul>
             </nav>
@@ -32,18 +29,85 @@
         <div class="flex-1 p-6">
             <!-- Header -->
             <header class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-semibold text-gray-900">Welcome, User</h1>
-                <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Button</button>
+                <h1 class="text-3xl font-semibold text-gray-900">Welcome,{{user.name}}</h1>
+                <button (click)="disconnect()" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Logout</button>
             </header>
+            @if (sectionchoose=='') {
             <!-- Main content area -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Example card -->
-                <div class="bg-white p-4 rounded shadow">
-                    <h2 class="text-xl font-semibold mb-2">Card Title</h2>
-                    <p class="text-gray-700">This is an example card. You can add any content here.</p>
+            <div class="">
+                  <!-- Comment -->
+                  <h2 class="text-2xl font-semibold mb-4">{{user.name}} Post Comments</h2>
+                    @for (item of commentm; track $index) {
+                        <div class="grid grid-cols-1">
+                    <div class="bg-white p-4 rounded shadow mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-semibold text-gray-800">{{item.username}}</span>
+                            <span class="text-gray-500 text-sm">Timestamp</span>
+                        </div>
+                        <p class="text-gray-700">{{item.contenu}}</p>
+                    </div></div>}    
+                    <h2 class="text-2xl font-semibold mb-4">{{user.name}} Stade Comments</h2>
+                    @for (item of comments; track $index) {
+                        <div class="grid grid-cols-1">
+                        <div class="bg-white p-4 rounded shadow mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-800">{{item.username}}</span>
+                                <span class="text-gray-500 text-sm">Timestamp</span>
+                            </div>
+                            <p class="text-gray-700">{{item.contenu}}</p>
+                        </div></div>}
+                        <h2 class="text-2xl font-semibold mb-4">{{user.name}} Hebergement Comments</h2>
+                        @for (item of commenth; track $index) {
+                            <div>
+                            <div class="bg-white p-4 rounded shadow mb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-gray-800">{{item.username}}</span>
+                                    <span class="text-gray-500 text-sm">Timestamp</span>
+                                </div>
+                                <p class="text-gray-700">{{item.contenu}}</p>
+                            </div></div>}
                 </div>
-                <!-- More cards... -->
+            }
+            @else if (sectionchoose=='profile') {
+                <!-- Profile Section -->
+            <div id="profile-section" >
+                <h2 class="text-2xl font-semibold mb-4">Profile</h2>
+                <div class="bg-white p-6 rounded shadow">
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Name</label>
+                        <input type="text" value="{{user.name}}" class="w-full mt-1 p-2 border rounded" placeholder="Your Name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Email</label>
+                        <input type="email" value="{{user.email}}"  class="w-full mt-1 p-2 border rounded" placeholder="Your Email">
+                    </div>
+                    <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Comments</button>
+                </div>
             </div>
+            }
+            @else if (sectionchoose=='settings') {
+                <div id="settings-section" >
+                    <h2 class="text-2xl font-semibold mb-4">Settings</h2>
+                    <div class="bg-white p-6 rounded shadow">
+                        <div class="mb-4">
+                            <label class="block text-gray-700">username:{{user.name}}</label>
+                            <input name="name"  [(ngModel)]="userm.name" type="email" class="w-full mt-1 p-2 border rounded" placeholder="username">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Email:{{user.email}}</label>
+                            <input name="email"  [(ngModel)]="userm.email" type="email" class="w-full mt-1 p-2 border rounded" placeholder="Email">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Password</label>
+                            <input type="password" value="{{user.password}}" class="w-full mt-1 p-2 border rounded" placeholder="New Password">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Confirm Password</label>
+                            <input type="password" name="password"  [(ngModel)]="userm.password"   class="w-full mt-1 p-2 border rounded" placeholder="Confirm New Password">
+                        </div>
+                        <button (click)="changeuser()" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Change Password</button>
+                    </div>
+                </div>}
         </div>
     </div>
 </body>

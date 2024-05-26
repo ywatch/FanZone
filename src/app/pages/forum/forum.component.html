@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <body class="bg-gray-100">
     <!-- Main Content -->
     <div class="container mx-auto px-6 py-8">
@@ -6,7 +7,7 @@
         <div class="mb-6">
             <h2 class="text-2xl font-semibold text-gray-800">Categories</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                <a href="">
+                <a (click)="choosegenerale()">
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <img src="../../../assets/gd.png" alt="General Discussion" class="w-full  object-cover rounded-t-lg">
                     <div class="mt-4">
@@ -14,7 +15,7 @@
                         <p class="text-gray-600">Talk about anything here.</p>
                     </div>
                 </div></a>
-                <a href="">
+                <a (click)="choosestade()" >
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <img src="../../../assets/Stadeds.jpg" alt="Tech Support" class="w-full  object-cover rounded-t-lg">
                     <div class="mt-4">
@@ -22,7 +23,7 @@
                         <p class="text-gray-600">Talk about Stades here.</p>
                     </div>
                 </div></a>
-                <a href="">
+                <a (click)="choosehebe()" >
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <img src="../../../assets/Hebergementds.jpg" alt="Off Topic" class="w-full  object-cover rounded-t-lg">
                     <div class="mt-4">
@@ -32,7 +33,8 @@
                 </div></a>
             </div>
         </div>
-        <button type="submit" (click)="showcreate()" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Create</button>
+@if (typeforum=='general') {     
+       <button type="submit" (click)="showcreate()" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Create</button>
         <!--posts_create-->
         @if (Showcreate==true) {
         <div class="mb-6">
@@ -90,7 +92,116 @@
                     </div>}
                 </div>}
             </div>
+        </div>}
+@else if (typeforum=='stades') {
+    <h1>Stades</h1>
+    <!-- <button type="submit" (click)="showcreate()" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Create</button>
+    @if (Showcreate==true) {
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800">Create a Post</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md mt-4">
+            <form>
+                <div class="mb-4">
+                    <label for="post-content" class="block text-gray-700 font-semibold mb-2">Post Content</label>
+                    <textarea id="contenu" name="contenu" [(ngModel)]="contenu" rows="4" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="What's on your mind?"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="post-image" class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                    <input type="file" id="post-image" (change)="onFileSelected($event)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <button type="submit" (click)="setPost()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Post</button>
+            </form>
         </div>
-    </div>
+    </div>}
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800">Posts</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md mt-4">
+            @for (item of messageforum; track $index) {
+            <div class="mb-6">
+                <div class="flex items-center mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">{{item.username}}</h3>
+                        <p class="text-gray-600 text-sm">{{item.datep}}</p>
+                    </div>
+                </div>
+                <p class="text-gray-800 mb-4">{{item.title}}</p>
+                <img src="./assets{{item.pathPic.split('\\assets')[1]}}" alt="Post Image" class="w-full  object-cover rounded-lg mb-4">
+                <button type="submit" (click)="fetchcomentmessage(item.id)" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Show Comment</button>
+                @if (Showcomment==true) {
+                <div class="bg-gray-100 p-4 rounded-lg mt-4">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">Comments</h4>
+                     @for (item of comment ; track $index) {
+                    <div class="mb-4">
+                        <div class="flex items-center mb-2">
+                            <div>
+                                <p class="text-gray-800 font-semibold">{{item.username}}</p>
+                                <p  class="text-gray-600 text-sm" >{{item.contenu}}</p>
+                            </div>
+                        </div>
+                    </div>}
+                    <form class="flex items-center">
+                        <input name="contenu" [(ngModel)]="commentmessage.contenu" type="text" placeholder="Add a comment..." class="w-full p-2 rounded-l-lg border border-gray-300 focus:outline-none focus:border-blue-500">
+                        <button (click)="setcommentMessage()" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Post</button>
+                    </form>
+                </div>}
+            </div>}
+        </div>
+    </div>-->} 
+@else if (typeforum=='hebergements') {
+    <h1>Hebergements</h1>
+    <!-- <button type="submit" (click)="showcreate()" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Create</button>
+    @if (Showcreate==true) {
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800">Create a Post</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md mt-4">
+            <form>
+                <div class="mb-4">
+                    <label for="post-content" class="block text-gray-700 font-semibold mb-2">Post Content</label>
+                    <textarea id="contenu" name="contenu" [(ngModel)]="contenu" rows="4" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="What's on your mind?"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="post-image" class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                    <input type="file" id="post-image" (change)="onFileSelected($event)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <button type="submit" (click)="setPost()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Post</button>
+            </form>
+        </div>
+    </div>}
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800">Posts</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md mt-4">
+            @for (item of messageforum; track $index) {
+            <div class="mb-6">
+                <div class="flex items-center mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">{{item.username}}</h3>
+                        <p class="text-gray-600 text-sm">{{item.datep}}</p>
+                    </div>
+                </div>
+                <p class="text-gray-800 mb-4">{{item.title}}</p>
+                <img src="./assets{{item.pathPic.split('\\assets')[1]}}" alt="Post Image" class="w-full  object-cover rounded-lg mb-4">
+                <button type="submit" (click)="fetchcomentmessage(item.id)" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Show Comment</button>
+                @if (Showcomment==true) {
+                <div class="bg-gray-100 p-4 rounded-lg mt-4">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">Comments</h4>
+                     @for (item of comment ; track $index) {
+                    <div class="mb-4">
+                        <div class="flex items-center mb-2">                           
+                            <div>
+                                <p class="text-gray-800 font-semibold">{{item.username}}</p>
+                                <p  class="text-gray-600 text-sm" >{{item.contenu}}</p>
+                            </div>
+                        </div>
+                    </div>}
+                    <form class="flex items-center">
+                        <input name="contenu" [(ngModel)]="commentmessage.contenu" type="text" placeholder="Add a comment..." class="w-full p-2 rounded-l-lg border border-gray-300 focus:outline-none focus:border-blue-500">
+                        <button (click)="setcommentMessage()" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Post</button>
+                    </form>
+                </div>}
+            </div>}
+        </div>
+    </div> -->
+}
+</div>
 </body>
 <app-footer></app-footer>
